@@ -7,7 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from mlflow.tracking  import MlflowClient
 
-class TrainPytorchTOLOv5:
+class TrainPytorchYOLOv5:
     def __init__(self):
         self.PATH_TO_PROJECTS = r'.'
         self.PATH_TO_MLFLOW_DIR ='.'
@@ -302,7 +302,7 @@ if __name__ == "__main__":
     with open(r"D:\PyQt_UI\UI\json_collection\tempconfig\pytorch_yolov5_config.json", 'r') as file:
         data = json.load(file)
 
-    gtf = TrainPytorchTOLOv5()
+    gtf = TrainPytorchYOLOv5()
     # print(gtf.set_project_params.__doc__)
     # gtf.set_project_params(project_name="Project-11",
     # experiment_name="Experiment-28", already_exist=0)
@@ -324,13 +324,13 @@ if __name__ == "__main__":
                          weight_path=data["model_params"]["weight_path"])
 
     gtf.set_hyper_params(epochs=data["hyper_params"]["epochs"],
-                         batch_size=data["hyper_params"]["epochs"],
+                         batch_size=data["hyper_params"]["batch_size"],
                          img_size=data["hyper_params"]["img_size"],
                          optimizer=data["hyper_params"]["optimizer"],
                          label_smoothing=0.0)
 
     gtf.set_training_params(patience=data["training_params"]["patience"],
-                            save_period=data["training_params"]["patience"],
+                            save_period=data["training_params"]["save_period"],
                             freeze=None)
     train_command = gtf.train()
 
